@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/psyreactor/rhn_channel-cookbook.svg?branch=master)](https://travis-ci.org/psyreactor/rhn_channel-cookbook)
+
 rhn_channel Cookbook
 ===============
 
