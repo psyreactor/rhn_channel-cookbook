@@ -23,9 +23,6 @@ package 'dmidecode' do
   action :install
 end
 
-log node[:rhn_channel][:username]
-log node[:rhn_channel][:password]
-
 %w(rhn-setup yum-rhn-plugin).each do |pkg|
   package pkg do
     action :upgrade

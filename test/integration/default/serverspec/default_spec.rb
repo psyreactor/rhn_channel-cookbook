@@ -2,8 +2,6 @@
 
 require_relative 'spec_helper'
 
-  describe package('dmidecode') do
-    it 'is installed' do
-      expect(subject).to be_installed
-    end
-   end
+describe package('dmidecode') do
+  it { should be_installed }
+end
