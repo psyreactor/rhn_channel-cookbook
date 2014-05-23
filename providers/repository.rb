@@ -17,12 +17,6 @@
 # limitations under the License.
 #
 
-# In Chef 11 and above, calling the use_inline_resources method will
-# make Chef create a new "run_context". When an action is called, any
-# nested resources are compiled and converged in isolation from the
-# recipe that calls it.
-
-# Allow for Chef 10 support
 use_inline_resources if defined?(use_inline_resources)
 
 def whyrun_supported?
@@ -30,10 +24,6 @@ def whyrun_supported?
 end
 
 action :create  do
-# Hack around the lack of "use_inline_resources" before Chef 11 by
-# uniquely naming the execute[yum-makecache] resources. Set the
-# notifies timing to :immediately for the same reasons. Remove both
-# of these when dropping Chef 10 support.
 
   execute "rhn_channel#{new_resource.repo}" do
     command "rhn-channel --add --channel=#{new_resource.repo} -u #{new_resource.user} -p #{new_resource.password}"
@@ -41,7 +31,6 @@ action :create  do
     notifies :run, "execute[yum-makecache-#{new_resource.repo}]", :immediately
   end
 
-# get the metadata for this repo only
   execute "yum-makecache-#{new_resource.repo}" do
     command "yum -q makecache --disablerepo=* --enablerepo=#{new_resource.repo}"
     action :nothing
